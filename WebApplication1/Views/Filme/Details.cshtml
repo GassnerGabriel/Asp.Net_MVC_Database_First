@@ -1,0 +1,49 @@
+﻿@model WebApplication1.Models.tb_filme
+
+@{
+    ViewBag.Title = "Detalhes do Filme";
+}
+
+<h2>Detalhes do filme</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lancamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lancamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nota)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tb_diretor.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_diretor.Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar para a lista", "Index")
+</p>

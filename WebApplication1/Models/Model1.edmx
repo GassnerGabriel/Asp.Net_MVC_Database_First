@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="etec2023GassnerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tb_diretor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Idade" Type="int" Nullable="false" />
+          <Property Name="Oscar" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_filme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Lancamento" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Nota" Type="int" />
+          <Property Name="Diretor" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tb_filme__Direto__4F7CD00D">
+          <End Role="tb_diretor" Type="Self.tb_diretor" Multiplicity="1" />
+          <End Role="tb_filme" Type="Self.tb_filme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_diretor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_filme">
+              <PropertyRef Name="Diretor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="etec2023GassnerModelStoreContainer">
+          <EntitySet Name="tb_diretor" EntityType="Self.tb_diretor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_filme" EntityType="Self.tb_filme" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tb_filme__Direto__4F7CD00D" Association="Self.FK__tb_filme__Direto__4F7CD00D">
+            <End Role="tb_diretor" EntitySet="tb_diretor" />
+            <End Role="tb_filme" EntitySet="tb_filme" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="etec2023GassnerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_diretor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Idade" Type="Int32" Nullable="false" />
+          <Property Name="Oscar" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_filme" Relationship="Self.FK__tb_filme__Direto__4F7CD00D" FromRole="tb_diretor" ToRole="tb_filme" />
+        </EntityType>
+        <EntityType Name="tb_filme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lancamento" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nota" Type="Int16" />
+          <Property Name="Diretor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_diretor" Relationship="Self.FK__tb_filme__Direto__4F7CD00D" FromRole="tb_filme" ToRole="tb_diretor" />
+        </EntityType>
+        <Association Name="FK__tb_filme__Direto__4F7CD00D">
+          <End Role="tb_diretor" Type="Self.tb_diretor" Multiplicity="1" />
+          <End Role="tb_filme" Type="Self.tb_filme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_diretor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_filme">
+              <PropertyRef Name="Diretor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="etec2023GassnerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_diretor" EntityType="Self.tb_diretor" />
+          <EntitySet Name="tb_filme" EntityType="Self.tb_filme" />
+          <AssociationSet Name="FK__tb_filme__Direto__4F7CD00D" Association="Self.FK__tb_filme__Direto__4F7CD00D">
+            <End Role="tb_diretor" EntitySet="tb_diretor" />
+            <End Role="tb_filme" EntitySet="tb_filme" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="etec2023GassnerModelStoreContainer" CdmEntityContainer="etec2023GassnerEntities">
+          <EntitySetMapping Name="tb_diretor">
+            <EntityTypeMapping TypeName="etec2023GassnerModel.tb_diretor">
+              <MappingFragment StoreEntitySet="tb_diretor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Idade" ColumnName="Idade" />
+                <ScalarProperty Name="Oscar" ColumnName="Oscar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_filme">
+            <EntityTypeMapping TypeName="etec2023GassnerModel.tb_filme">
+              <MappingFragment StoreEntitySet="tb_filme">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Lancamento" ColumnName="Lancamento" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Diretor" ColumnName="Diretor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
